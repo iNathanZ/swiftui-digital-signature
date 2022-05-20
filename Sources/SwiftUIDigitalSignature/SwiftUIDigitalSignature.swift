@@ -25,7 +25,7 @@ public struct SignatureView: View {
     @State private var saveSignature = false
     
     @State private var fontFamily = fontFamlies[0]
-    @State private var color = Color.blue
+    @State private var color = Color.white
     
     @State private var drawing = DrawingPath()
     @State private var image = UIImage()
@@ -41,18 +41,12 @@ public struct SignatureView: View {
     public var body: some View {
         VStack {
             HStack {
-                Button("Done", action: extractImageAndHandle)
+                Button("Valider", action: extractImageAndHandle)
                 Spacer()
-                Button("Cancel", action: onCancel)
+                Button("Annuler", action: onCancel)
             }
-            Picker(selection: $selectedTab, label: EmptyView()) {
-                ForEach(tabTitles, id: \.self) { tab in
-                    Text(tab)
-                        .tag(tabTitles.firstIndex(of: tab)!)
-                }
-            }.pickerStyle(SegmentedPickerStyle())
             signatureContent
-            Button("Clear signature", action: clear)
+            Button("Effacer la signature", action: clear)
             HStack {
                 if selectedTab == Tab.type.rawValue {
                     FontFamilyPicker(selection: $fontFamily)
